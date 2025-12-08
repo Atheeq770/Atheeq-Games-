@@ -12,164 +12,132 @@
     --accent:#ff4d6d;
     --accent2:#7c3aed;
     --muted:#9aa4b2;
-    --glass:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
   }
   *{box-sizing:border-box}
   html,body{height:100%}
   body{
     font-family:Rubik,Inter,system-ui,Segoe UI,Roboto,Arial;
-    margin:0;
-    min-height:100vh;
-    background:
-      radial-gradient(800px 400px at 10% 10%, rgba(124,58,237,0.09), transparent),
-      linear-gradient(180deg,#03040a 0%, #071022 100%);
-    color:#e8eef8;
-    display:flex;
-    align-items:flex-start;
-    justify-content:center;
-    padding:18px
+    margin:0;background:
+    radial-gradient(800px 400px at 10% 10%, rgba(124,58,237,0.06), transparent),
+    linear-gradient(180deg,#03040a 0%, #071022 100%);
+    color:#e8eef8;padding:14px;display:flex;justify-content:center;
   }
-  .app{
-    width:100%;
-    max-width:980px;
-    background:var(--card);
-    border-radius:16px;
-    padding:16px;
-    box-shadow:0 12px 40px rgba(2,6,23,0.7);
-    border:1px solid rgba(255,255,255,0.03)
-  }
-  header{display:flex;align-items:center;gap:12px}
-  .logo{
-    width:56px;height:56px;
-    border-radius:12px;
-    background:linear-gradient(135deg,var(--accent),var(--accent2));
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-weight:700;color:#021;
-    box-shadow:0 6px 18px rgba(124,58,237,0.12)
-  }
+  .app{width:100%;max-width:980px;background:var(--card);border-radius:14px;padding:14px;box-shadow:0 10px 30px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.02)}
+  header{display:flex;gap:12px;align-items:center}
+  .logo{width:52px;height:52px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-weight:700;color:#021}
   h1{margin:0;font-size:18px}
   p.lead{margin:0;color:var(--muted);font-size:13px}
-  .row{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
-  label{font-size:13px;color:var(--muted);display:block;margin-bottom:6px}
-  input,select,button,textarea{
-    background:transparent;
-    border:1px solid rgba(255,255,255,0.03);
-    color:inherit;
-    padding:10px;
-    border-radius:10px;
-    font-size:15px;
-    width:100%
-  }
-  textarea{min-height:88px;resize:vertical}
-  .col{flex:1 1 260px;min-width:220px}
-  .controls{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
-  button.primary{
-    background:linear-gradient(90deg,var(--accent),var(--accent2));
-    border:none;color:#021;cursor:pointer;
-    padding:10px 14px;border-radius:10px;
-    font-weight:600
-  }
-  button.ghost{
-    background:transparent;
-    border:1px solid rgba(255,255,255,0.04);
-    color:var(--muted);
-    cursor:pointer;
-    padding:10px 12px;border-radius:10px
-  }
-  .card{
-    background:rgba(255,255,255,0.02);
-    padding:14px;border-radius:12px;
-    border:1px solid rgba(255,255,255,0.02)
-  }
+  .row{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}
+  .col{flex:1 1 260px;min-width:210px}
+  label{display:block;color:var(--muted);font-size:13px;margin-bottom:6px}
+  input,select,button,textarea{background:transparent;border:1px solid rgba(255,255,255,0.03);color:inherit;padding:10px;border-radius:10px;font-size:15px;width:100%}
+  textarea{min-height:72px;resize:vertical}
+  .controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+  .card{background:rgba(255,255,255,0.02);padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)}
+  button.primary{background:linear-gradient(90deg,var(--accent),var(--accent2));border:none;color:#021;padding:10px 14px;border-radius:10px;cursor:pointer;font-weight:600}
+  button.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);padding:10px 12px;border-radius:10px;cursor:pointer}
   .center{text-align:center}
-  .big{font-size:26px;font-weight:700;color:#fff}
+  .big{font-size:24px;font-weight:700}
   .muted-small{color:var(--muted);font-size:13px}
-  .pill{
-    background:rgba(255,255,255,0.02);
-    padding:6px 10px;border-radius:999px;
-    border:1px solid rgba(255,255,255,0.02);
-    display:inline-block
-  }
-  .secret{display:flex;flex-direction:column;gap:10px;align-items:center;justify-content:center;padding:12px}
-  .reveal-word{
-    font-size:20px;font-weight:700;
-    padding:12px 16px;border-radius:10px;
-    background:linear-gradient(90deg, rgba(255,255,255,0.03), transparent);
-    min-width:160px;text-align:center
-  }
+  .pill{background:rgba(255,255,255,0.02);padding:6px 10px;border-radius:999px;border:1px solid rgba(255,255,255,0.02);display:inline-block}
+  .reveal-word{font-size:18px;font-weight:700;padding:10px 14px;border-radius:10px;background:linear-gradient(90deg, rgba(255,255,255,0.03), transparent);min-width:150px;text-align:center}
   .hidden{display:none}
-  footer{margin-top:12px;color:var(--muted);font-size:13px;text-align:center}
-  .accent-note{color:var(--accent);font-weight:600}
-  .tiny{font-size:12px;color:var(--muted)}
-  .neon{text-shadow:0 6px 18px rgba(124,58,237,0.12)}
-  .big-cta{font-size:16px;padding:12px 16px}
-  @media (max-width:540px){
-    body{padding:12px}
-    .row{flex-direction:column}
-    .logo{width:48px;height:48px}
-    h1{font-size:16px}
-    .big{font-size:20px}
-  }
+  .tiny{font-size:12px;color:var(--muted);margin-top:6px}
+  .summary{font-size:14px;background:rgba(0,0,0,0.25);padding:10px;border-radius:10px;max-height:220px;overflow:auto}
+  @media(max-width:540px){body{padding:10px}.row{flex-direction:column}.logo{width:44px;height:44px}.big{font-size:20px}}
 </style>
 </head>
-
 <body>
 <div class="app" role="application" aria-labelledby="title">
   <header>
-    <div class="logo neon">AG</div>
+    <div class="logo">AG</div>
     <div>
       <h1 id="title">Atheeq Games — Sussy Question</h1>
-      <p class="lead">Pass & Play • Mobile optimized • Secret reveals • Bluffer advantage</p>
+      <p class="lead">Pass & Play • Mobile-ready • Bluffer bias • Configurable rounds</p>
     </div>
   </header>
 
-  <section class="row">
+  <!-- Setup -->
+  <section class="row" style="margin-top:12px">
     <div class="col card">
       <label>Number of players (5–10)</label>
-      <input type="number" id="numPlayers" min="5" max="10" value="6" />
+      <input id="numPlayers" type="number" min="5" max="10" value="6" />
 
-      <label style="margin-top:10px">Words (editable) — Randomize to auto-fill</label>
-      <textarea id="words">Birthday,Toothbrush,Laptop,Wallet,Charger,Watch</textarea>
-
-      <div class="controls" style="margin-top:8px">
-        <button class="primary" id="randomizeBtn">Randomize Words</button>
-        <button class="ghost" id="startBtn">Start Game</button>
+      <div style="margin-top:8px;display:flex;gap:8px">
+        <div style="flex:1">
+          <label>Random word count</label>
+          <input id="randomCount" type="number" min="3" max="60" value="10" />
+        </div>
+        <div style="width:120px">
+          <label>&nbsp;</label>
+          <button class="primary" id="randomizeBtn">Randomize</button>
+        </div>
       </div>
 
-      <div class="tiny" style="margin-top:8px">
-        Tip: You can edit these words after randomizing. One player will become the bluffer ("?") or get a different word.
+      <label style="margin-top:10px">Words (editable)</label>
+      <textarea id="words">Birthday,Toothbrush,Laptop,Wallet,Charger,Watch</textarea>
+      <div class="tiny">Tip: Randomize then edit. The app uses these words to assign a base word and the odd player may get "?" or a different word.</div>
+
+      <!-- Ask config -->
+      <div style="margin-top:12px" class="card">
+        <label>Ask phase configuration</label>
+        <div style="display:flex;gap:8px;align-items:center;margin-top:8px">
+          <div style="flex:1">
+            <label>Min asks per player</label>
+            <input id="minPerPlayer" type="number" min="1" max="5" value="1" />
+          </div>
+          <div style="flex:1">
+            <label>Total turns (optional, 0 = calculate)</label>
+            <input id="totalTurns" type="number" min="0" max="100" value="0" />
+          </div>
+        </div>
+
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <label style="display:flex;align-items:center;gap:8px">
+            <input id="superAsker" type="checkbox" /> <span class="muted-small">One random player asks 3 times</span>
+          </label>
+        </div>
+        <div class="tiny">Default ensures everyone asks at least the minimum. If total turns is set to 0 it will be minPerPlayer * players.</div>
+      </div>
+
+      <div class="controls" style="margin-top:12px">
+        <button class="ghost" id="startBtn">Start Game</button>
+        <button class="ghost" id="downloadBtn">Download HTML</button>
       </div>
     </div>
 
+    <!-- Theme + Questions -->
     <div class="col card center">
-      <div class="muted-small">Round Theme</div>
-      <div class="big neon" id="themeDisplay">Mixed Items</div>
-      <div class="muted-small" style="margin-top:8px">
-        Pass the phone face-down for reveals. Let the chaos begin.
-      </div>
-      <div id="legend" class="muted-small" style="margin-top:12px">
-        Bluffer advantage ON — they’re more likely to be targeted in Ask Mode 😈
+      <div class="muted-small">Round / Theme</div>
+      <div class="big" id="themeDisplay">Mixed Items</div>
+
+      <div style="margin-top:10px;text-align:left">
+        <label>Question prompts (1–5) — each line is a prompt</label>
+        <textarea id="prompts" rows="5">How often do you use it?
+Can you keep it in your pocket?
+Would it survive rain?
+Would you gift it to someone?
+Is it primarily indoors or outdoors?</textarea>
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <label style="display:flex;align-items:center;gap:8px"><input id="randomPromptToggle" type="checkbox" /> Random prompt each ask</label>
+        </div>
+        <div class="tiny">If random prompt is off, prompts rotate in order each ask. You can edit prompts freely.</div>
       </div>
     </div>
   </section>
 
+  <!-- Play area -->
   <section id="playArea" class="hidden" style="margin-top:12px">
     <div class="row">
       <div class="col card center">
-        <div class="muted-small">
-          Player <span class="pill" id="currentPlayerNum">1</span> of <span class="pill" id="totalPlayers">6</span>
-        </div>
-
-        <div class="secret" id="secretPane">
+        <div class="muted-small">Player <span class="pill" id="currentPlayerNum">1</span> of <span class="pill" id="totalPlayers">6</span></div>
+        <div class="secret" id="secretPane" style="margin-top:10px">
           <div class="muted-small">Tap to reveal your card</div>
-          <button class="primary big-cta" id="revealBtn">Reveal</button>
+          <button class="primary" id="revealBtn">Reveal</button>
 
-          <div id="revealed" class="hidden">
+          <div id="revealed" class="hidden" style="margin-top:10px">
             <div class="reveal-word" id="yourWord">???</div>
-            <div class="muted-small">Press NEXT to move to the next player</div>
-
+            <div class="muted-small">Press NEXT when ready</div>
             <div class="controls" style="margin-top:10px">
               <button class="primary" id="nextPlayerBtn">Next</button>
               <button class="ghost" id="reopenBtn">Reopen Reveal</button>
@@ -179,30 +147,25 @@
       </div>
 
       <div class="col card center">
-
         <div id="askPhase" class="hidden">
-          <div class="muted-small">Ask-phase: Click NEXT ASK when ready</div>
-          <div class="big" style="margin-top:10px">Next Ask</div>
+          <div class="muted-small">Ask phase — click NEXT ASK</div>
+          <div style="margin-top:10px" class="big">Next Ask</div>
+          <div class="muted-small" style="margin-top:8px">Prompt:</div>
+          <div class="reveal-word" id="askPrompt" style="margin-top:10px">Player 1 → Player 2</div>
 
-          <div class="muted-small" style="margin-top:10px">Prompt:</div>
-          <div class="reveal-word" id="askPrompt" style="margin-top:12px">Player 1 → Player 2</div>
-
-          <div class="controls" style="margin-top:12px">
+          <div style="display:flex;gap:8px;margin-top:10px">
             <button class="primary" id="nextAskBtn">Next Ask</button>
-            <button class="ghost" id="finishBtn">Finish & Reveal</button>
+            <button class="ghost" id="finishBtn">Finish & Reveal Odd One</button>
           </div>
 
-          <div class="tiny" style="margin-top:10px">
-            App randomizes ask/target. Bluffer gets targeted more often 🔥
-          </div>
+          <div class="tiny" style="margin-top:10px">Each ask is either a random prompt or rotates through your prompt list. Bluffer is biased as usual.</div>
         </div>
 
         <div id="votingArea" class="hidden" style="margin-top:8px">
           <div class="muted-small">Vote: Who is the odd one?</div>
           <label style="margin-top:10px">Your vote</label>
           <select id="voteSelect"></select>
-
-          <div class="controls" style="margin-top:10px">
+          <div style="margin-top:10px" class="controls">
             <button class="primary" id="revealResultBtn">Reveal True Odd One</button>
             <button class="ghost" id="newGameBtn">New Game</button>
           </div>
@@ -211,26 +174,76 @@
             <div class="center">
               <div class="big" id="oddNumber">#</div>
               <div class="muted-small" id="oddWord">Word: ...</div>
-              <div class="muted-small accent-note" id="oddWas"></div>
+              <div class="muted-small" id="oddWas"></div>
             </div>
           </div>
         </div>
 
       </div>
     </div>
-  </section>
 
-  <footer>
-    <div class="muted-small">
-      Made by Atheeq Games • Shareable • Mobile-friendly • Pure chaos
+    <div style="margin-top:12px" class="card">
+      <div class="muted-small">Ask summary (live)</div>
+      <div id="askSummary" class="summary">No asks yet.</div>
     </div>
-  </footer>
+  </section>
 </div>
 
+<!-- Simple modal -->
+<div id="modal" class="hidden" style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.5);z-index:999">
+  <div style="background:#071021;padding:14px;border-radius:12px;max-width:420px;width:90%;color:#e8eef8">
+    <div id="modalContent"></div>
+    <div style="margin-top:12px;text-align:right">
+      <button class="primary" id="modalOk">OK</button>
+    </div>
+  </div>
+</div>
 
 <script>
 (function(){
+  // --- elements
+  const randomizeBtn = document.getElementById('randomizeBtn');
+  const randomCount = document.getElementById('randomCount');
+  const startBtn = document.getElementById('startBtn');
+  const downloadBtn = document.getElementById('downloadBtn');
+  const numPlayersEl = document.getElementById('numPlayers');
+  const wordsEl = document.getElementById('words');
+  const minPerPlayerEl = document.getElementById('minPerPlayer');
+  const totalTurnsEl = document.getElementById('totalTurns');
+  const superAskerEl = document.getElementById('superAsker');
+  const themeDisplay = document.getElementById('themeDisplay');
 
+  const promptsEl = document.getElementById('prompts');
+  const randomPromptToggle = document.getElementById('randomPromptToggle');
+
+  const playArea = document.getElementById('playArea');
+  const totalPlayersSpan = document.getElementById('totalPlayers');
+  const currentPlayerNum = document.getElementById('currentPlayerNum');
+  const revealBtn = document.getElementById('revealBtn');
+  const revealed = document.getElementById('revealed');
+  const yourWord = document.getElementById('yourWord');
+  const nextPlayerBtn = document.getElementById('nextPlayerBtn');
+  const reopenBtn = document.getElementById('reopenBtn');
+
+  const askPhase = document.getElementById('askPhase');
+  const askPrompt = document.getElementById('askPrompt');
+  const nextAskBtn = document.getElementById('nextAskBtn');
+  const finishBtn = document.getElementById('finishBtn');
+
+  const askSummary = document.getElementById('askSummary');
+
+  const voteSelect = document.getElementById('voteSelect');
+  const revealResultBtn = document.getElementById('revealResultBtn');
+  const resultPane = document.getElementById('resultPane');
+  const oddNumber = document.getElementById('oddNumber');
+  const oddWord = document.getElementById('oddWord');
+  const oddWas = document.getElementById('oddWas');
+
+  const modal = document.getElementById('modal');
+  const modalContent = document.getElementById('modalContent');
+  const modalOk = document.getElementById('modalOk');
+
+  // --- word pool
   const WORD_POOL = [
     "Birthday","Toothbrush","Laptop","Wallet","Charger","Watch","Samosa","Tea","Idli","Phone",
     "Remote","Shoe","Perfume","Spectacles","Camera","Book","Bottle","Keys","Earphones","Lamp",
@@ -238,137 +251,256 @@
     "TV","Fan","Cup","Plate","Chair","Table","Bag","Umbrella","Purse","Mouse","Keyboard",
     "Mango","Banana","Apple","Kettle","Pan","Spoon","Fork","Soap","Shampoo","Toothpaste",
     "Helmet","Gloves","Scarf","Blanket","Ticket","Passport","Laptop bag","Adapter","Calendar",
-    "Diary","Keychain","Slippers","Clock"
+    "Diary","Keychain","Slippers","Clock","Bottle cap","Charger cable"
   ];
 
-  const random = arr => arr[Math.floor(Math.random()*arr.length)];
-  const shuffle = arr => arr.sort(()=>Math.random()-0.5);
-
-  const randomizeBtn = document.getElementById("randomizeBtn");
-  const startBtn = document.getElementById("startBtn");
-  const numPlayersEl = document.getElementById("numPlayers");
-  const wordsEl = document.getElementById("words");
-  const playArea = document.getElementById("playArea");
-  const totalPlayersSpan = document.getElementById("totalPlayers");
-  const currentPlayerNum = document.getElementById("currentPlayerNum");
-  const revealBtn = document.getElementById("revealBtn");
-  const revealed = document.getElementById("revealed");
-  const yourWord = document.getElementById("yourWord");
-  const nextPlayerBtn = document.getElementById("nextPlayerBtn");
-  const reopenBtn = document.getElementById("reopenBtn");
-  const askPhase = document.getElementById("askPhase");
-  const askPrompt = document.getElementById("askPrompt");
-  const nextAskBtn = document.getElementById("nextAskBtn");
-  const finishBtn = document.getElementById("finishBtn");
-  const voteSelect = document.getElementById("voteSelect");
-  const revealResultBtn = document.getElementById("revealResultBtn");
-  const resultPane = document.getElementById("resultPane");
-  const oddNumber = document.getElementById("oddNumber");
-  const oddWord = document.getElementById("oddWord");
-  const oddWas = document.getElementById("oddWas");
-  const newGameBtn = document.getElementById("newGameBtn");
-  const themeDisplay = document.getElementById("themeDisplay");
-
-  let state = {};
-
-  randomizeBtn.onclick = () => {
-    const sample = shuffle([...WORD_POOL]).slice(0, 10);
-    wordsEl.value = sample.join(",");
-    themeDisplay.textContent = "Mixed Items";
+  // --- state
+  let state = {
+    n:6,
+    words:[],
+    assignments:[],
+    oddIndex:-1,
+    currentPlayer:0,
+    askTurns:0,
+    totalTurns:0,
+    askedCounts:[],
+    prompts:[],
+    promptIndex:0,
+    superAskerIndex:-1
   };
 
+  // utils
+  const rand = (arr) => arr[Math.floor(Math.random()*arr.length)];
+  const rndInt = (max) => Math.floor(Math.random()*max);
+  const shuffle = (a) => a.sort(()=>Math.random()-0.5);
+  const showModal = (html) => { modalContent.innerHTML = html; modal.classList.remove('hidden'); };
+  modalOk.onclick = ()=> modal.classList.add('hidden');
+
+  // Randomize words using requested count
+  randomizeBtn.onclick = () => {
+    let k = parseInt(randomCount.value,10) || 10;
+    if(k < 3) k = 3;
+    if(k > 200) k = 200;
+    // if pool smaller, repeat shuffle-peek
+    let sample = [];
+    const pool = WORD_POOL.slice();
+    while(sample.length < k){
+      if(pool.length === 0) pool.push(...WORD_POOL);
+      sample.push(pool.splice(Math.floor(Math.random()*pool.length),1)[0]);
+    }
+    wordsEl.value = sample.join(',');
+    themeDisplay.textContent = 'Mixed Items';
+  };
+
+  // Download current HTML (convenience)
+  downloadBtn.onclick = () => {
+    const blob = new Blob([document.documentElement.outerHTML], {type: 'text/html'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href = url; a.download = 'sussy-question.html'; a.click(); URL.revokeObjectURL(url);
+  };
+
+  // Start game
   startBtn.onclick = () => {
-    const n = +numPlayersEl.value;
-    const raw = wordsEl.value.split(",").map(x => x.trim()).filter(Boolean);
-
+    const n = parseInt(numPlayersEl.value,10);
+    if(isNaN(n) || n<5 || n>10){ alert('Choose between 5 and 10 players'); return; }
     state.n = n;
+    totalPlayersSpan.textContent = n;
+    const raw = wordsEl.value.split(',').map(s=>s.trim()).filter(Boolean);
+    if(raw.length === 0){ alert('Add words or randomize first'); return; }
     state.words = raw;
-    state.assignments = [];
-    state.currentPlayer = 0;
 
-    const baseWord = random(raw);
-    for (let i=0;i<n;i++) state.assignments.push(baseWord);
-
-    const oddIndex = state.oddIndex = Math.floor(Math.random()*n);
+    // Prepare assignments: pick base word for most players
+    const base = rand(raw);
+    state.assignments = Array(n).fill(base);
+    state.oddIndex = Math.floor(Math.random()*n);
+    // 50% chance to be pure bluffer '?'
     const useReal = (raw.length > 1 && Math.random() > 0.5);
-
     if(useReal){
-      const diff = raw.filter(w=>w!==baseWord);
-      state.assignments[oddIndex] = diff.length ? random(diff) : random(raw);
+      let others = raw.filter(w=>w!==base);
+      if(others.length === 0) others = raw;
+      state.assignments[state.oddIndex] = rand(others);
     } else {
-      state.assignments[oddIndex] = "?";
+      state.assignments[state.oddIndex] = '?';
     }
 
-    playArea.classList.remove("hidden");
-    revealed.classList.add("hidden");
+    // Prepare ask-turns logic
+    const minPerPlayer = Math.max(1, parseInt(minPerPlayerEl.value,10) || 1);
+    let totalTurns = parseInt(totalTurnsEl.value,10) || 0;
+    if(totalTurns <= 0) totalTurns = minPerPlayer * n;
+    // Ensure total turns >= minPerPlayer * n
+    if(totalTurns < minPerPlayer * n) totalTurns = minPerPlayer * n;
 
-    totalPlayersSpan.textContent = n;
+    state.totalTurns = totalTurns;
+    state.askTurns = 0;
+    state.askedCounts = Array(n).fill(0);
+    state.promptIndex = 0;
+    state.prompts = promptsEl.value.split('\n').map(s=>s.trim()).filter(Boolean);
+    if(state.prompts.length === 0) state.prompts = ['How often do you use it?','Can you keep it in your pocket?','Would it survive rain?','Would you gift it?','Indoors or outdoors?'];
+
+    // Optionally choose a "super asker" who will ask 3 times
+    state.superAskerIndex = -1;
+    if(superAskerEl.checked){
+      state.superAskerIndex = Math.floor(Math.random()*n);
+      // Guarantee total turns allows the super-asker
+      if(state.totalTurns < (minPerPlayer * n) + 2) state.totalTurns += 2;
+    }
+
+    state.currentPlayer = 0;
+    // UI updates
+    playArea.classList.remove('hidden');
+    askPhase.classList.add('hidden');
+    document.getElementById('secretPane').classList.remove('hidden');
+    revealed.classList.add('hidden');
     currentPlayerNum.textContent = 1;
 
-    voteSelect.innerHTML = "";
-    for(let i=0;i<n;i++){
-      const o = document.createElement("option");
-      o.value = i; o.textContent = "Player " + (i+1);
-      voteSelect.appendChild(o);
-    }
+    // voteSelect
+    voteSelect.innerHTML = '';
+    for(let i=0;i<n;i++){ const opt = document.createElement('option'); opt.value = i; opt.textContent = 'Player ' + (i+1); voteSelect.appendChild(opt); }
+
+    // Update summary
+    renderAskSummary();
   };
 
+  // reveal card
   revealBtn.onclick = () => {
     const idx = state.currentPlayer;
     const val = state.assignments[idx];
-    yourWord.textContent = (val === "?") ? "?? (Bluffer)" : val;
-    revealed.classList.remove("hidden");
+    yourWord.textContent = (val === '?') ? '?? (Bluffer)' : val;
+    revealed.classList.remove('hidden');
   };
+  reopenBtn.onclick = ()=> revealed.classList.toggle('hidden');
 
-  reopenBtn.onclick = () => revealed.classList.toggle("hidden");
-
+  // move to next player during reveal
   nextPlayerBtn.onclick = () => {
     state.currentPlayer++;
     if(state.currentPlayer >= state.n){
-      askPhase.classList.remove("hidden");
-      updateAsk();
-      document.getElementById("secretPane").classList.add("hidden");
+      // all reveals done
+      askPhase.classList.remove('hidden');
+      document.getElementById('secretPane').classList.add('hidden');
+      // show first ask message in standby
+      askPrompt.textContent = 'Press NEXT ASK to begin (' + state.totalTurns + ' turns planned)';
       return;
     }
     currentPlayerNum.textContent = state.currentPlayer + 1;
-    yourWord.textContent = "???";
-    revealed.classList.add("hidden");
+    yourWord.textContent = '???';
+    revealed.classList.add('hidden');
   };
 
-  function updateAsk(){
-    const n = state.n;
-    const asker = Math.floor(Math.random()*n);
-    let target = random([...Array(n).keys()]);
-
-    if(Math.random() < 0.3) target = state.oddIndex;
-    if(target === asker){
-      const others = [...Array(n).keys()].filter(i=>i!==asker);
-      target = random(others);
-    }
-
-    askPrompt.textContent = `Player ${asker+1} → Player ${target+1}`;
+  // Ask selection helpers
+  function weightedTargetIndex(n, weightIndex){
+    const weights = Array(n).fill(1);
+    if(typeof weightIndex === 'number' && weightIndex >= 0 && weightIndex < n) weights[weightIndex] = 4;
+    const total = weights.reduce((a,b)=>a+b,0);
+    let r = Math.random()*total;
+    for(let i=0;i<n;i++){ r -= weights[i]; if(r<=0) return i; }
+    return n-1;
   }
 
-  nextAskBtn.onclick = updateAsk;
+  function chooseAskPairBalanced(){
+    const n = state.n;
+    // Choose asker preferring those who asked less, but keep it random
+    let minAsked = Math.min(...state.askedCounts);
+    let candidates = [];
+    for(let i=0;i<n;i++) if(state.askedCounts[i] === minAsked) candidates.push(i);
+    let asker = candidates[Math.floor(Math.random()*candidates.length)];
+    // If superAsker, occasionally force superAsker
+    if(state.superAskerIndex >= 0){
+      // ensure superAsker asks at least 3 times across the full session
+      const needed = Math.max(0, 3 - state.askedCounts[state.superAskerIndex]);
+      if(needed > 0 && Math.random() < 0.35) asker = state.superAskerIndex;
+    }
+    // choose target biased to bluffer
+    let target = weightedTargetIndex(n, state.oddIndex);
+    if(target === asker){
+      const others = Array.from({length:n}, (_,i)=>i).filter(i=>i!==asker);
+      // if bluffer is available, choose them; else random
+      if(others.includes(state.oddIndex) && state.oddIndex !== asker) target = state.oddIndex;
+      else target = others[Math.floor(Math.random()*others.length)];
+    }
+    return {asker, target};
+  }
+
+  // get a prompt for ask
+  function getNextPrompt(){
+    const prompts = state.prompts;
+    if(randomPromptToggle.checked) return prompts[Math.floor(Math.random()*prompts.length)];
+    const p = prompts[state.promptIndex % prompts.length];
+    state.promptIndex++;
+    return p;
+  }
+
+  // update ask prompt and counts
+  function updateAsk(){
+    if(state.askTurns >= state.totalTurns){
+      // done
+      showSummaryAndFinish();
+      return;
+    }
+    const pair = chooseAskPairBalanced();
+    state.lastPair = pair;
+    state.askedCounts[pair.asker] += 1;
+    state.askTurns += 1;
+    // show prompt text
+    const prompt = getNextPrompt();
+    askPrompt.textContent = `Player ${pair.asker+1} → Player ${pair.target+1}\nQ: ${prompt}`;
+    renderAskSummary();
+    // if we've reached planned turns, inform user
+    if(state.askTurns >= state.totalTurns){
+      setTimeout(()=> showSummaryAndFinish(), 300);
+    }
+  }
+
+  nextAskBtn.onclick = () => {
+    if(typeof state.assignments === 'undefined' || state.assignments.length === 0){ alert('Start the game and finish reveals first'); return; }
+    updateAsk();
+  };
+
+  function renderAskSummary(){
+    let lines = [];
+    for(let i=0;i<state.n;i++){
+      lines.push(`Player ${i+1}: asked ${state.askedCounts[i] || 0} times`);
+    }
+    lines.push('');
+    lines.push(`Turns: ${state.askTurns} / ${state.totalTurns}`);
+    askSummary.textContent = lines.join('\n');
+  }
+
+  function showSummaryAndFinish(){
+    // create summary HTML
+    let html = '<strong>Ask phase complete</strong><br/><br/>';
+    html += '<div style="text-align:left"><ul style="padding-left:18px;margin:6px 0">';
+    for(let i=0;i<state.n;i++){
+      html += `<li>Player ${i+1}: asked ${state.askedCounts[i] || 0} times</li>`;
+    }
+    html += '</ul></div>';
+    html += `<div style="margin-top:8px">Press OK to continue to voting. Total turns: ${state.askTurns}</div>`;
+    showModal(html);
+    // go to voting UI
+    askPhase.classList.add('hidden');
+    document.getElementById('votingArea').classList.remove('hidden');
+    resultPane.classList.add('hidden');
+  }
 
   finishBtn.onclick = () => {
-    askPhase.classList.add("hidden");
-    document.getElementById("votingArea").classList.remove("hidden");
+    showSummaryAndFinish();
   };
 
   revealResultBtn.onclick = () => {
     const odd = state.oddIndex;
-    oddNumber.textContent = "#" + (odd+1);
-    const val = state.assignments[odd];
-    oddWord.textContent = (val==="?" ? "They had no word (Bluffer)" : "Word: " + val);
-    oddWas.textContent = (val==="?" ? "They were the bluffer!" : "They had a different word!");
-    resultPane.classList.remove("hidden");
+    oddNumber.textContent = '#' + (odd+1);
+    const v = state.assignments[odd];
+    oddWord.textContent = (v === '?') ? 'They had no word (Bluffer)' : 'Word: ' + v;
+    oddWas.textContent = (v === '?') ? 'They were the bluffer!' : 'They had a different word!';
+    resultPane.classList.remove('hidden');
   };
 
-  newGameBtn.onclick = () => location.reload();
+  document.getElementById('newGameBtn').onclick = () => location.reload();
+
+  // keyboard quick reveal
+  document.addEventListener('keydown', (e)=> { if(e.key===' '){ if(!playArea.classList.contains('hidden') && revealed.classList.contains('hidden')) revealBtn.click(); } });
 
 })();
 </script>
-
 </body>
 </html>
+    
