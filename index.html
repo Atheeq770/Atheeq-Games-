@@ -2,914 +2,496 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 <title>Atheeq Games — Sussy Question (Spy Show)</title>
-<meta name="description" content="Atheeq Games - Sussy Question. Mobile-first party game with spy vibes, confetti, sounds, avatars and analytics." />
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap" rel="stylesheet">
+
 <style>
-  :root{
-    --bg:#071022;
-    --card:#0e2433;
-    --primary:#FFD93D;
-    --accent:#2DE2E6;
-    --accent2:#FF4D8C;
-    --muted:#9aa4b2;
-    --glass:rgba(255,255,255,0.03);
-    --success:#9EF01A;
-    --danger:#FF6B6B;
-    --max-width:980px;
-    --safe-bottom:16px;
-  }
-  *{box-sizing:border-box}
-  html,body{height:100%}
-  body{
-    margin:0; font-family:Rubik,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
-    background:radial-gradient(600px 300px at 10% 8%, rgba(124,58,237,0.06), transparent),
-               linear-gradient(180deg,#03040a 0%, #071022 100%);
-    color:#eaf2fb;
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-    display:flex;justify-content:center;padding:14px;
-  }
-  .wrap{width:100%;max-width:var(--max-width)}
-  .card{
-    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    border-radius:14px;padding:14px;border:1px solid rgba(255,255,255,0.03);
-    box-shadow:0 10px 28px rgba(2,6,23,0.55);
-  }
-  header{display:flex;gap:12px;align-items:center;margin-bottom:12px}
-  .logo{
-    width:60px;height:60px;border-radius:12px;
-    background:linear-gradient(135deg,var(--primary),var(--accent2));
-    display:flex;align-items:center;justify-content:center;font-weight:900;color:#051;
-    box-shadow:0 6px 18px rgba(45,226,230,0.06);
-    font-size:18px;
-  }
-  h1{margin:0;font-size:18px}
-  .lead{margin:0;color:var(--muted);font-size:13px}
-  .row{display:flex;gap:12px;flex-wrap:wrap}
-  label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
-  input[type="number"],input[type="text"],textarea,select{background:transparent;border:1px solid rgba(255,255,255,0.03);color:inherit;padding:10px;border-radius:10px;font-size:15px;width:100%}
-  textarea{min-height:78px;resize:vertical}
-  .col{flex:1 1 260px;min-width:220px}
-  .controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
-  button{border-radius:10px;padding:10px 12px;font-weight:700;border:none;cursor:pointer}
-  .btn-primary{background:linear-gradient(90deg,var(--primary),var(--accent2));color:#041;box-shadow:0 6px 12px rgba(255,217,61,0.08)}
-  .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)}
-  .muted{color:var(--muted);font-size:13px}
-  .small{font-size:12px;color:var(--muted)}
-  .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.02);font-weight:700}
-  .big{font-size:22px;font-weight:900}
-  /* accordion */
-  .accordion{margin-top:10px;border-radius:10px;overflow:hidden}
-  .acc-head{display:flex;justify-content:space-between;align-items:center;padding:10px;background:rgba(255,255,255,0.01);cursor:pointer;border-bottom:1px solid rgba(255,255,255,0.01)}
-  .acc-body{padding:10px;display:none;background:transparent}
-  .acc-body.open{display:block}
-  .toggle {display:inline-flex;align-items:center;gap:8px}
-  .switch{width:46px;height:26px;border-radius:20px;background:rgba(255,255,255,0.06);position:relative;display:inline-block}
-  .switch .knob{position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:white;transform:translateX(0);transition:transform .22s cubic-bezier(.2,.9,.3,1)}
-  .switch.on{background:linear-gradient(90deg,var(--accent),var(--accent2))}
-  .switch.on .knob{transform:translateX(20px)}
-  .range{width:100%}
-  .avatar-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
-  .avatar{width:48px;height:48px;border-radius:999px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);display:flex;align-items:center;justify-content:center;font-weight:800}
-  .avatar.num{font-size:16px}
-  .avatar.face img{width:36px;height:36px;border-radius:999px}
-  /* reveal card */
-  .reveal-area{display:flex;gap:10px;align-items:center;flex-direction:column;min-height:220px}
-  .card-flip{width:92%;max-width:420px;height:140px;perspective:1000px}
-  .card-inner{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .48s cubic-bezier(.22,1,.36,1)}
-  .card-front,.card-back{position:absolute;inset:0;border-radius:12px;display:flex;align-items:center;justify-content:center;backface-visibility:hidden;padding:12px}
-  .card-front{background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));font-weight:800}
-  .card-back{transform:rotateY(180deg);background:linear-gradient(90deg,var(--accent2),var(--accent));color:#041;font-weight:900}
-  .reveal-word{font-size:20px}
-  .hidden{display:none}
-  /* sticky bottom bar */
-  .sticky{position:fixed;left:0;right:0;bottom:calc(var(--safe-bottom));display:flex;justify-content:center;padding:10px;z-index:40}
-  .sticky-inner{width:100%;max-width:var(--max-width);display:flex;justify-content:space-between;gap:12px;padding:10px;border-radius:14px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);box-shadow:0 8px 24px rgba(2,6,23,0.5);align-items:center}
-  .cta{flex:1}
-  .secondary{width:48px;height:48px;border-radius:10px;background:rgba(255,255,255,0.02);display:flex;align-items:center;justify-content:center}
-  /* ask prompt */
-  .ask-prompt{font-size:15px;font-weight:700;padding:10px;border-radius:10px;background:linear-gradient(90deg,rgba(255,255,255,0.02),transparent);text-align:center}
-  /* modal */
-  .modal-back{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;z-index:60}
-  .modal-card{background:linear-gradient(180deg,#07121a,#0c1d2a);padding:12px;border-radius:12px;max-width:420px;width:92%}
-  .summary-list{max-height:260px;overflow:auto;padding:6px}
-  /* small responsive */
-  @media(max-width:560px){
-    .avatar{width:44px;height:44px}.logo{width:52px;height:52px}.card-flip{height:160px}
-    .sticky-inner{padding:8px}
-  }
-  /* animations */
-  @keyframes bounce {0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-  .bounce{animation:bounce 900ms ease-in-out infinite}
-  @keyframes pulse {0%{box-shadow:0 0 0 0 rgba(255,255,255,0.02)}50%{box-shadow:0 8px 20px rgba(45,226,230,0.08)}100%{box-shadow:0 0 0 0 rgba(255,255,255,0.02)}}
-  .pulse{animation:pulse 1600ms ease-in-out infinite}
-  /* confetti canvas overlay */
-  #confetti-canvas{position:fixed;inset:0;pointer-events:none;z-index:50}
+/* ============================================================
+   ROOT THEME VARIABLES — SPY SHOW + FUN COLORFUL DESIGN
+============================================================ */
+:root{
+  --bg:#071022;
+  --card:#0e2433;
+  --primary:#FFD93D;
+  --accent:#2DE2E6;
+  --pink:#FF4D8C;
+  --lime:#9EF01A;
+  --text:#E0E1DD;
+  --mute:#9aa4b2;
+  --glass:rgba(255,255,255,0.03);
+  --max-w:500px;
+}
+
+/* ============================================================
+   BASE STYLES
+============================================================ */
+*{box-sizing:border-box;}
+html,body{
+  height:100%;
+  margin:0;
+  font-family:"Rubik",system-ui;
+  background:linear-gradient(120deg,#083048,#071022);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+}
+
+.container{
+  width:100%;
+  max-width:var(--max-w);
+  margin:0 auto;
+  padding:16px;
+}
+
+/* ============================================================
+   HEADERS + LOGO
+============================================================ */
+.header{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:24px;
+}
+.logo{
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  background:var(--accent);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:#000;
+  font-weight:700;
+}
+.title-block h1{
+  font-size:22px;
+  margin:0;
+  font-weight:800;
+}
+.title-block small{
+  color:var(--mute);
+}
+
+/* ============================================================
+   CARDS & INPUTS
+============================================================ */
+.card{
+  background:var(--card);
+  padding:16px;
+  margin-bottom:18px;
+  border-radius:14px;
+  box-shadow:0 10px 22px rgba(0,0,0,0.3);
+}
+
+.card h2{
+  margin-top:0;
+  font-size:18px;
+  font-weight:700;
+}
+
+input, textarea, select{
+  width:100%;
+  padding:10px;
+  border-radius:8px;
+  border:none;
+  margin-top:6px;
+  background:var(--glass);
+  color:var(--text);
+}
+
+.btn{
+  padding:12px 20px;
+  border-radius:10px;
+  background:var(--primary);
+  color:#000;
+  border:none;
+  font-weight:700;
+  cursor:pointer;
+  margin:6px 0;
+}
+.btn-pink{ background:var(--pink); color:#fff; }
+.btn-accent{ background:var(--accent); color:#000; }
+
+/* ============================================================
+   AVATARS
+============================================================ */
+.avatars{
+  display:flex;
+  gap:8px;
+  margin-top:10px;
+}
+.avatar{
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  background:#222;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-weight:700;
+  color:#fff;
+  transition:transform 0.2s, box-shadow 0.2s;
+}
+.avatar.bounce{ transform:translateY(-4px); box-shadow:0 0 10px var(--primary); }
+.avatar.pulse{ box-shadow:0 0 12px var(--accent); }
+
+/* ============================================================
+   STICKY BOTTOM BAR
+============================================================ */
+.sticky{
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  background:#0005;
+  backdrop-filter:blur(10px);
+  display:flex;
+  justify-content:center;
+  padding:16px;
+}
+.sticky-btn{
+  width:var(--max-w);
+  padding:14px;
+  border-radius:12px;
+  border:none;
+  font-weight:700;
+  background:var(--primary);
+  color:#000;
+  cursor:pointer;
+}
+
+/* ============================================================
+   MODAL FIXED (always works)
+============================================================ */
+.modal{
+  position:fixed;
+  inset:0;
+  background:#0009;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+  visibility:hidden;
+}
+.modal.active{ visibility:visible; }
+.modal-card{
+  background:var(--card);
+  padding:20px;
+  border-radius:16px;
+  width:90%;
+  max-width:380px;
+}
+.modal-card button{
+  margin-top:16px;
+  width:100%;
+}
+
+.hidden{ display:none; }
+
 </style>
 </head>
+
 <body>
-<div class="wrap">
-  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
-    <div style="display:flex;align-items:center;gap:12px">
-      <div class="logo">AG</div>
-      <div>
-        <h1>Atheeq Games</h1>
-        <div class="lead">Sussy Question — Spy Show Edition</div>
-      </div>
-    </div>
-    <div style="text-align:right" class="small muted">Mobile optimized • Mid-range performance</div>
-  </div>
+<div class="container">
 
-  <!-- setup -->
+<!-- ============================================================
+     HEADER
+============================================================ -->
+<div class="header">
+  <div class="logo">AG</div>
+  <div class="title-block">
+    <h1>Atheeq Games</h1>
+    <small>Sussy Question — Spy Show Edition</small>
+  </div>
+</div>
+
+<!-- ============================================================
+     SETUP SCREEN
+============================================================ -->
+<div id="setupScreen">
+
   <div class="card">
-    <div class="row">
-      <div class="col">
-        <label>Number of players (5–10)</label>
-        <input id="numPlayers" type="number" min="5" max="10" value="6" aria-label="Number of players" />
-
-        <div style="display:flex;gap:8px;margin-top:10px">
-          <div style="flex:1">
-            <label>Random word count</label>
-            <input id="randomCount" type="number" min="3" max="200" value="10" />
-          </div>
-          <div style="width:120px">
-            <label>&nbsp;</label>
-            <button id="randomizeBtn" class="btn-primary" aria-label="Randomize words">Randomize</button>
-          </div>
-        </div>
-
-        <label style="margin-top:10px">Words (editable, comma separated)</label>
-        <textarea id="words">Birthday,Toothbrush,Laptop,Wallet,Charger,Watch</textarea>
-
-        <div class="accordion" style="margin-top:12px">
-          <div class="acc-head" data-acc="askrules">
-            <div><strong>Ask Rules</strong><div class="small muted">Min asks, total turns, super-asker</div></div>
-            <div class="small muted">Open</div>
-          </div>
-          <div class="acc-body" data-acc-body="askrules">
-            <div style="display:flex;gap:8px">
-              <div style="flex:1">
-                <label>Min asks per player</label>
-                <input id="minPerPlayer" type="number" min="1" max="5" value="1" />
-              </div>
-              <div style="flex:1">
-                <label>Total turns (0 = auto)</label>
-                <input id="totalTurns" type="number" min="0" value="0" />
-              </div>
-            </div>
-            <div style="display:flex;gap:8px;align-items:center;margin-top:8px">
-              <label style="display:flex;gap:8px;align-items:center">
-                <div class="switch" id="superAskerSwitch" role="switch" aria-checked="false"><div class="knob"></div></div>
-                <div class="small muted">One random player asks 3 times (super-asker)</div>
-              </label>
-            </div>
-            <div class="small muted" style="margin-top:8px">If total turns is 0 it will be minPerPlayer * players.</div>
-          </div>
-        </div>
-
-        <div class="accordion" style="margin-top:12px">
-          <div class="acc-head" data-acc="prompts">
-            <div><strong>Prompts</strong><div class="small muted">5 editable prompts; random option</div></div>
-            <div class="small muted">Open</div>
-          </div>
-          <div class="acc-body" data-acc-body="prompts">
-            <label>Prompts (one per line)</label>
-            <textarea id="prompts" rows="5">How often do you use it?
-Can you keep it in your pocket?
-Would it survive rain?
-Would you gift it to someone?
-Is it primarily indoors or outdoors?</textarea>
-            <div style="margin-top:8px;display:flex;align-items:center;gap:8px">
-              <div class="switch" id="randomPromptSwitch" role="switch" aria-checked="false"><div class="knob"></div></div>
-              <div class="small muted">Random prompt each ask</div>
-            </div>
-          </div>
-        </div>
-
-        <div style="display:flex;gap:8px;margin-top:12px;align-items:center">
-          <button id="downloadBtn" class="btn-ghost">Download HTML</button>
-          <button id="startBtn" class="btn-primary">Start Game</button>
-        </div>
-      </div>
-
-      <!-- right column: theme, avatars -->
-      <div class="col" style="padding-left:8px">
-        <div class="card" style="padding:10px">
-          <div><strong>Round theme</strong></div>
-          <div class="big" id="themeDisplay" style="margin-top:8px">Mixed Items</div>
-          <div class="small muted" style="margin-top:8px">Toggle avatar style, sound and theme intensity below.</div>
-
-          <div style="margin-top:10px">
-            <label>Avatar style</label>
-            <div style="display:flex;gap:8px;align-items:center;margin-top:8px">
-              <button id="avatarNumBtn" class="btn-ghost">Numbers</button>
-              <button id="avatarFaceBtn" class="btn-ghost">Faces</button>
-            </div>
-            <div class="avatar-row" id="avatarPreview" style="margin-top:12px"></div>
-          </div>
-
-          <div style="margin-top:12px">
-            <label>Sounds</label>
-            <div style="display:flex;gap:8px;align-items:center;margin-top:8px">
-              <div class="switch" id="soundSwitch" role="switch" aria-checked="true"><div class="knob"></div></div>
-              <div class="small muted">Sound effects (toggle)</div>
-            </div>
-          </div>
-
-          <div style="margin-top:12px">
-            <label>Theme</label>
-            <select id="themeSelect" aria-label="Theme select" style="margin-top:8px">
-              <option value="colorful">Fun & Colourful</option>
-              <option value="spy">Spy Dark</option>
-              <option value="neon">Neon Cyber</option>
-              <option value="pastel">Candy Pop</option>
-            </select>
-          </div>
-        </div>
-      </div>
-    </div>
+    <h2>Number of players (5–10)</h2>
+    <input type="number" id="playerCount" min="5" max="10" value="6">
   </div>
 
-  <!-- Play area (hidden until start) -->
-  <div id="playWrap" class="hidden" style="margin-top:12px">
-    <div class="card">
-      <div style="display:flex;align-items:center;justify-content:space-between">
-        <div><strong>Reveal Phase</strong><div class="small muted">Pass the device face-down for private reveals</div></div>
-        <div class="small muted">Players: <span id="totalPlayers">6</span></div>
-      </div>
-
-      <div class="reveal-area" style="margin-top:12px">
-        <div class="card-flip">
-          <div class="card-inner" id="cardInner" aria-live="polite">
-            <div class="card-front" id="cardFront">
-              <div style="text-align:center">
-                <div class="small muted">Player</div>
-                <div class="big" id="revealPlayer">1</div>
-                <div style="margin-top:10px" class="small muted">Tap to reveal your card</div>
-              </div>
-            </div>
-            <div class="card-back" id="cardBack">
-              <div style="text-align:center">
-                <div class="reveal-word" id="backWord">???</div>
-                <div class="small muted" style="margin-top:8px">Show only this to the current player</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div style="width:100%;max-width:420px;text-align:center">
-          <div class="controls" style="justify-content:center">
-            <button id="revealBtn" class="btn-primary">Reveal</button>
-            <button id="nextPlayerBtn" class="btn-ghost">Next</button>
-            <button id="openAskBtn" class="btn-ghost hidden">Start Ask Phase</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Ask area -->
-    <div id="askArea" class="card hidden" style="margin-top:12px">
-      <div style="display:flex;align-items:center;justify-content:space-between">
-        <div><strong>Ask Phase</strong><div class="small muted">Press Next Ask to generate a prompt</div></div>
-        <div class="small muted">Turns: <span id="askTurns">0</span>/<span id="askTotal">0</span></div>
-      </div>
-
-      <div style="margin-top:12px;display:flex;gap:12px;align-items:center;flex-direction:column">
-        <div id="askPrompt" class="ask-prompt">Player 1 → Player 2</div>
-        <div id="avatarsLine" style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:8px"></div>
-
-        <div style="margin-top:12px;display:flex;gap:8px">
-          <button id="nextAskBtn" class="btn-primary">Next Ask</button>
-          <button id="finishAskBtn" class="btn-ghost">Finish Ask Phase</button>
-        </div>
-
-        <div style="margin-top:12px" class="small muted">Ask summary:</div>
-        <pre id="askSummary" class="summary-list small muted">No asks yet.</pre>
-      </div>
-    </div>
-
-    <!-- Voting area -->
-    <div id="voteCard" class="card hidden" style="margin-top:12px">
-      <div style="display:flex;align-items:center;justify-content:space-between">
-        <div><strong>Vote</strong><div class="small muted">Tap a player to vote (silent)</div></div>
-        <div class="small muted">Voting</div>
-      </div>
-
-      <div id="voteGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:8px;margin-top:12px"></div>
-      <div style="margin-top:12px;display:flex;gap:8px;justify-content:flex-end">
-        <button id="revealResultBtn" class="btn-primary">Reveal True Odd One</button>
-        <button id="restartBtn" class="btn-ghost">New Game</button>
-      </div>
-
-      <div id="resultPane" class="hidden" style="margin-top:12px">
-        <div style="text-align:center">
-          <div class="big" id="oddNumber">#</div>
-          <div class="small muted" id="oddWord">Word: ...</div>
-          <div class="small muted" id="oddWas"></div>
-        </div>
-      </div>
-    </div>
+  <div class="card">
+    <h2>Words</h2>
+    <textarea id="wordList" rows="2">Birthday,Toothbrush,Laptop,Wallet,Charger,Watch</textarea>
+    <button class="btn-accent" id="randomizeWords">Randomize</button>
   </div>
+
+  <div class="card">
+    <h2>Ask Rules</h2>
+    <label>Minimum asks per player</label>
+    <input type="number" id="minAsks" value="1">
+    <label>Total turns (0 = auto)</label>
+    <input type="number" id="totalTurns" value="0">
+  </div>
+
+  <div class="card">
+    <h2>Prompts</h2>
+    <textarea id="prompts" rows="2">How often do you use it?,Can it fit in a pocket?,Is it expensive?,Would you take it outside?,Does it make noise?</textarea>
+  </div>
+
+  <button class="btn" id="startGame">Start Game</button>
+
+</div><!-- end setup -->
+
+
+<!-- ============================================================
+     REVEAL SCREEN
+============================================================ -->
+<div id="revealScreen" class="hidden card">
+  <h2 id="revealTitle">Player 1 — Tap to reveal</h2>
+  <button class="btn-pink" id="tapReveal">Reveal</button>
+  <button class="btn" id="nextReveal">Next</button>
 </div>
 
-<!-- sticky bottom bar -->
+<!-- ============================================================
+     ASK PHASE
+============================================================ -->
+<div id="askScreen" class="hidden card">
+  <h2 id="askHeader">Ask Phase</h2>
+  <div id="askPrompt" style="margin-bottom:14px;"></div>
+  <div class="avatars" id="avatarRow"></div>
+</div>
+
+<!-- ============================================================
+     VOTE SCREEN
+============================================================ -->
+<div id="voteScreen" class="hidden card">
+  <h2>Vote the Odd One</h2>
+  <div class="avatars" id="voteRow"></div>
+</div>
+
+</div><!-- end container -->
+
+<!-- ============================================================
+     STICKY FOOTER
+============================================================ -->
 <div class="sticky">
-  <div class="sticky-inner">
-    <div class="cta" id="stickyLabel">Ready</div>
-    <div style="display:flex;gap:8px">
-      <button id="stickyPrimary" class="btn-primary">Next</button>
-      <div id="stickySecondary" class="secondary btn-ghost" title="Settings">⚙️</div>
-    </div>
-  </div>
+  <button class="sticky-btn" id="stickyAction">Next</button>
 </div>
 
-<!-- modal / confetti canvas -->
-<canvas id="confetti-canvas"></canvas>
-<div id="modal" class="modal-back hidden" aria-hidden="true">
+<!-- ============================================================
+     MODAL (fixed + safe)
+============================================================ -->
+<div id="modal" class="modal">
   <div class="modal-card">
     <div id="modalContent"></div>
-    <div style="text-align:right;margin-top:10px">
-      <button id="modalOk" class="btn-primary">OK</button>
-    </div>
+    <button class="btn" id="modalOk">OK</button>
   </div>
 </div>
 
+<!-- ============================================================
+     SCRIPT — FIXED & OPTIMIZED
+============================================================ -->
 <script>
-/* =========================
-   Sussy Question - Game Engine
-   Mid-range perf, medium confetti, full sound (WebAudio)
-   ========================= */
-
-// -- Utilities
-const $ = sel => document.querySelector(sel);
-const $$ = sel => Array.from(document.querySelectorAll(sel));
-const clamp = (v,min,max) => Math.max(min,Math.min(max,v));
-
-// -- Elements
-const numPlayersEl = $('#numPlayers');
-const randomCountEl = $('#randomCount');
-const randomizeBtn = $('#randomizeBtn');
-const wordsEl = $('#words');
-const startBtn = $('#startBtn');
-const downloadBtn = $('#downloadBtn');
-const themeDisplay = $('#themeDisplay');
-
-const avatarNumBtn = $('#avatarNumBtn');
-const avatarFaceBtn = $('#avatarFaceBtn');
-const avatarPreview = $('#avatarPreview');
-const soundSwitch = $('#soundSwitch');
-const themeSelect = $('#themeSelect');
-const superAskerSwitch = $('#superAskerSwitch');
-const randomPromptSwitch = $('#randomPromptSwitch');
-
-const playWrap = $('#playWrap');
-const cardInner = $('#cardInner');
-const cardFront = $('#cardFront');
-const cardBack = $('#cardBack');
-const revealBtn = $('#revealBtn');
-const nextPlayerBtn = $('#nextPlayerBtn');
-const openAskBtn = $('#openAskBtn');
-const revealPlayer = $('#revealPlayer');
-const backWord = $('#backWord');
-const totalPlayers = $('#totalPlayers');
-
-const askArea = $('#askArea');
-const askPrompt = $('#askPrompt');
-const nextAskBtn = $('#nextAskBtn');
-const finishAskBtn = $('#finishAskBtn');
-const avatarsLine = $('#avatarsLine');
-const askSummary = $('#askSummary');
-const askTurnsEl = $('#askTurns');
-const askTotalEl = $('#askTotal');
-
-const voteCard = $('#voteCard');
-const voteGrid = $('#voteGrid');
-const revealResultBtn = $('#revealResultBtn');
-const restartBtn = $('#restartBtn');
-const oddNumber = $('#oddNumber');
-const oddWord = $('#oddWord');
-const oddWas = $('#oddWas');
-
-const stickyPrimary = $('#stickyPrimary');
-const stickyLabel = $('#stickyLabel');
+const setup = $('#setupScreen');
+const reveal = $('#revealScreen');
+const ask = $('#askScreen');
+const vote = $('#voteScreen');
 
 const modal = $('#modal');
 const modalContent = $('#modalContent');
 const modalOk = $('#modalOk');
 
-const confettiCanvas = $('#confetti-canvas');
+const stickyAction = $('#stickyAction');
 
-// -- Word pool
-const WORD_POOL = [
-  "Birthday","Toothbrush","Laptop","Wallet","Charger","Watch","Samosa","Tea","Idli","Phone",
-  "Remote","Shoe","Perfume","Spectacles","Camera","Book","Bottle","Keys","Earphones","Lamp",
-  "Pillow","Towel","Bicycle","Scooter","Notebook","Pen","Sunglasses","Mask","Rice","Candle",
-  "TV","Fan","Cup","Plate","Chair","Table","Bag","Umbrella","Purse","Mouse","Keyboard",
-  "Mango","Banana","Apple","Kettle","Pan","Spoon","Fork","Soap","Shampoo","Toothpaste",
-  "Helmet","Gloves","Scarf","Blanket","Ticket","Passport","Laptop bag","Adapter","Calendar",
-  "Diary","Keychain","Slippers","Clock","Bottle cap","Charger cable"
-];
+const playerCountEl = $('#playerCount');
+const wordListEl = $('#wordList');
+const promptsEl = $('#prompts');
+const minAsksEl = $('#minAsks');
+const totalTurnsEl = $('#totalTurns');
 
-// -- State
+const tapRevealBtn = $('#tapReveal');
+const nextRevealBtn = $('#nextReveal');
+
+const askHeader = $('#askHeader');
+const askPrompt = $('#askPrompt');
+const avatarRow = $('#avatarRow');
+const voteRow = $('#voteRow');
+
+function $(q){ return document.querySelector(q); }
+
+/* ============================================================
+   GAME STATE
+============================================================ */
 let state = {
   n:6,
   words:[],
+  prompts:[],
+  revealIndex:0,
+  oddIndex:0,
   assignments:[],
-  oddIndex:-1,
-  currentReveal:0,
   askTurns:0,
   totalTurns:0,
   askedCounts:[],
-  prompts:[],
-  promptIndex:0,
-  superAskerIndex:-1,
-  avatarStyle:'number', // or 'face'
-  soundOn:true,
-  theme:'colorful'
 };
 
-// -- Audio via WebAudio (synth) to avoid large assets
-let audioCtx = null;
-function ensureAudio(){
-  if(audioCtx) return;
-  try{
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  }catch(e){ audioCtx = null; }
-}
-function playBeep(freq=440, time=0.06, type='sine', gain=0.08){
-  if(!state.soundOn) return;
-  ensureAudio();
-  if(!audioCtx) return;
-  const o = audioCtx.createOscillator();
-  const g = audioCtx.createGain();
-  o.type = type; o.frequency.value = freq;
-  g.gain.setValueAtTime(gain, audioCtx.currentTime);
-  g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + time);
-  o.connect(g); g.connect(audioCtx.destination);
-  o.start(); o.stop(audioCtx.currentTime + time + 0.02);
-}
-function playPing(){ playBeep(880,0.08,'sine',0.09); }
-function playPop(){ playBeep(600,0.05,'triangle',0.06); }
-function playFlip(){ playBeep(420,0.09,'sine',0.08); }
-function playFanfare(){
-  if(!state.soundOn) return;
-  ensureAudio();
-  if(!audioCtx) return;
-  const now = audioCtx.currentTime;
-  const gain = audioCtx.createGain(); gain.gain.value = 0.08; gain.connect(audioCtx.destination);
-  const o1 = audioCtx.createOscillator(); o1.type='sine'; o1.frequency.value=880; o1.connect(gain); o1.start(now); o1.stop(now+0.25);
-  const o2 = audioCtx.createOscillator(); o2.type='sawtooth'; o2.frequency.value=660; o2.connect(gain); o2.start(now+0.05); o2.stop(now+0.35);
-}
+/* ============================================================
+   START GAME SETUP
+============================================================ */
+$('#startGame').onclick = ()=>{
+  state.n = +playerCountEl.value;
+  state.words = wordListEl.value.split(',').map(w=>w.trim()).filter(Boolean);
+  state.prompts = promptsEl.value.split(',').map(w=>w.trim()).filter(Boolean);
 
-// -- Helpers
-function shuffle(arr){ return arr.slice().sort(()=>Math.random()-0.5); }
-function rand(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
-function weightedIndex(n, favIndex){
-  const weights = Array(n).fill(1);
-  if(typeof favIndex === 'number' && favIndex>=0 && favIndex<n) weights[favIndex]=4;
-  const total = weights.reduce((a,b)=>a+b,0);
-  let r=Math.random()*total;
-  for(let i=0;i<n;i++){ r-=weights[i]; if(r<=0) return i; }
-  return n-1;
-}
+  const minAsk = +minAsksEl.value || 1;
+  let T = +totalTurnsEl.value;
+  if(!T || T<=0) T = minAsk * state.n;
+  state.totalTurns = T;
 
-// -- UI: accordion toggles
-$$('.acc-head').forEach(h=>{
-  h.addEventListener('click',()=>{
-    const key = h.getAttribute('data-acc');
-    const body = document.querySelector(`[data-acc-body="${key}"]`);
-    if(body.classList.contains('open')){ body.classList.remove('open'); } else { body.classList.add('open'); }
-  });
-});
-
-// -- switches (simple)
-function attachSwitch(el){
-  el.addEventListener('click',()=>{
-    el.classList.toggle('on');
-    const on = el.classList.contains('on');
-    el.setAttribute('aria-checked', on ? 'true':'false');
-    return on;
-  });
-}
-attachSwitch(superAskerSwitch);
-attachSwitch(randomPromptSwitch);
-attachSwitch(soundSwitch);
-soundSwitch.classList.add('on'); // default on
-attachSwitch($('#superAskerSwitch'));
-
-// -- avatar buttons
-avatarNumBtn.addEventListener('click',()=>{
-  state.avatarStyle='number'; renderAvatarPreview();
-});
-avatarFaceBtn.addEventListener('click',()=>{
-  state.avatarStyle='face'; renderAvatarPreview();
-});
-
-// preview avatars
-function renderAvatarPreview(){
-  avatarPreview.innerHTML='';
-  const n = Math.max(6, parseInt(numPlayersEl.value)||6);
-  for(let i=0;i<n;i++){
-    const a = document.createElement('div'); a.className='avatar '+(state.avatarStyle==='face'?'face':'num'); a.setAttribute('aria-hidden','true');
-    if(state.avatarStyle==='face'){
-      const svg = smallFaceSVG(i+1); a.innerHTML=svg;
-    } else {
-      a.textContent = (i+1);
-    }
-    avatarPreview.appendChild(a);
-  }
-}
-function smallFaceSVG(i){
-  const colors = ['#FFD93D','#2DE2E6','#FFB86B','#FF4D8C','#9EF01A','#7C3AED'];
-  const bg = colors[i % colors.length];
-  return `<div style="width:36px;height:36px;border-radius:999px;display:flex;align-items:center;justify-content:center;background:${bg};font-weight:800;color:#051">${i}</div>`;
-}
-renderAvatarPreview();
-
-// -- randomize words
-randomizeBtn.addEventListener('click',()=>{
-  let k = parseInt(randomCountEl.value,10) || 10;
-  k = clamp(k,3,200);
-  let pool = WORD_POOL.slice();
-  let sample = [];
-  while(sample.length < k){
-    if(pool.length===0) pool = WORD_POOL.slice();
-    const idx = Math.floor(Math.random()*pool.length);
-    sample.push(pool.splice(idx,1)[0]);
-  }
-  wordsEl.value = sample.join(',');
-  themeDisplay.textContent = 'Mixed Items';
-  playPop();
-});
-
-// -- download current page HTML (convenience)
-downloadBtn.addEventListener('click',()=>{
-  const blob = new Blob([document.documentElement.outerHTML], {type:'text/html'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a'); a.href = url; a.download = 'atheeq-sussy.html'; a.click(); URL.revokeObjectURL(url);
-});
-
-// -- start game
-startBtn.addEventListener('click', ()=>{
-  const n = clamp(parseInt(numPlayersEl.value,10)||6,5,10);
-  state.n = n;
-  state.avatarStyle = state.avatarStyle || 'number';
-  state.soundOn = soundSwitch.classList.contains('on');
-  state.theme = themeSelect.value || 'colorful';
-  const raw = wordsEl.value.split(',').map(s=>s.trim()).filter(Boolean);
-  if(raw.length === 0){ alert('Add or randomize words first'); return; }
-  state.words = raw;
-  // assignments
-  const base = rand(raw);
-  state.assignments = Array(n).fill(base);
-  state.oddIndex = Math.floor(Math.random()*n);
-  const useReal = (raw.length>1 && Math.random() > 0.5);
-  if(useReal){
-    const others = raw.filter(w=>w!==base); state.assignments[state.oddIndex] = others.length ? rand(others) : rand(raw);
-  } else {
-    state.assignments[state.oddIndex] = '?';
-  }
-  // ask turns compute
-  const minPer = Math.max(1, parseInt($('#minPerPlayer').value,10) || 1);
-  let total = Math.max(0, parseInt($('#totalTurns').value,10) || 0);
-  if(total <= 0) total = minPer * n;
-  if(total < minPer * n) total = minPer * n;
-  state.totalTurns = total;
+  state.revealIndex = 0;
   state.askTurns = 0;
-  state.askedCounts = Array(n).fill(0);
-  state.promptIndex = 0;
-  state.prompts = $('#prompts').value.split('\n').map(s=>s.trim()).filter(Boolean);
-  if(state.prompts.length === 0) state.prompts = ['How often do you use it?','Can you keep it in your pocket?','Would it survive rain?','Would you gift it?','Indoors or outdoors?'];
-  state.superAskerIndex = $('#superAskerSwitch').classList.contains('on') ? Math.floor(Math.random()*n) : -1;
-  // UI init
-  $('#totalPlayers').textContent = n;
-  state.currentReveal = 0;
-  revealPlayer.textContent = (state.currentReveal+1);
-  backWord.textContent = '???';
-  playWrap.classList.remove('hidden');
-  // populate sticky
-  stickyLabel.textContent = 'Reveal Phase';
-  stickyPrimary.textContent = 'Reveal';
-  // hide ask area, vote area
-  askArea.classList.add('hidden'); voteCard.classList.add('hidden');
-  renderAvatarPreview();
-  renderAvatarsLine();
-  playPop();
-  // prepare vote grid later
-});
+  state.askedCounts = Array(state.n).fill(0);
 
-// flip behavior
-let flipped = false;
-function flipCard(showBack){
-  const el = cardInner;
-  if(showBack){ el.style.transform = 'rotateY(180deg)'; flipped = true; } else { el.style.transform = 'rotateY(0deg)'; flipped = false; }
-}
-$('#revealBtn').addEventListener('click', ()=>{
-  const idx = state.currentReveal;
-  const val = state.assignments[idx];
-  backWord.textContent = (val === '?') ? '?? (Bluffer)' : val;
-  flipCard(true);
-  playFlip();
-  $('#revealBtn').classList.add('hidden');
-});
-$('#nextPlayerBtn').addEventListener('click', ()=>{
-  // close flip
-  flipCard(false);
-  state.currentReveal++;
-  if(state.currentReveal >= state.n){
-    // done reveals -> go to ask phase
-    $('#openAskBtn').classList.remove('hidden');
-    $('#revealBtn').classList.add('hidden'); $('#nextPlayerBtn').classList.add('hidden');
-    stickyLabel.textContent = 'Ready to Ask';
-    stickyPrimary.textContent = 'Start Ask';
-    stickyPrimary.onclick = startAskPhase;
-    playPop();
-    return;
-  }
-  revealPlayer.textContent = (state.currentReveal+1);
-  $('#revealBtn').classList.remove('hidden');
-  playPop();
-});
-
-// show back when flipping completes
-cardInner.addEventListener('transitionend', (e)=> {
-  if(flipped){
-    // nothing extra required here
-  }
-});
-
-// start ask phase
-function startAskPhase(){
-  // ensure ask area only opens after all reveals are done
-  if(state.currentReveal < state.n){
-    alert('Finish all reveals first.');
-    return;
-  }
-  stickyLabel.textContent = 'Ask Phase';
-  stickyPrimary.textContent = 'Next Ask';
-  stickyPrimary.onclick = ()=> nextAskBtn.click();
-  $('#openAskBtn').classList.add('hidden');
-  askArea.classList.remove('hidden');
-  $('#askTurns').textContent = state.askTurns;
-  $('#askTotal').textContent = state.totalTurns;
-  nextAskBtn.focus();
-  playPing();
-}
-
-// avatars line render
-function renderAvatarsLine(){
-  avatarsLine.innerHTML = '';
+  // assign odd word
+  state.oddIndex = Math.floor(Math.random()*state.n);
+  state.assignments = [];
   for(let i=0;i<state.n;i++){
-    const a = document.createElement('div'); a.className='avatar '+(state.avatarStyle==='face'?'face':'num');
-    a.style.cursor='default';
-    if(state.avatarStyle==='face'){
-      a.innerHTML = smallFaceSVG(i+1);
-    } else {
-      a.textContent = i+1;
-    }
-    avatarsLine.appendChild(a);
+    state.assignments.push(i===state.oddIndex ? state.words[0] : state.words[1]);
   }
+
+  setup.classList.add('hidden');
+  reveal.classList.remove('hidden');
+
+  updateRevealUI();
+};
+
+/* ============================================================
+   REVEAL PHASE
+============================================================ */
+function updateRevealUI(){
+  tapRevealBtn.textContent = "Reveal";
+  $('#revealTitle').textContent = `Player ${state.revealIndex+1} — Tap to reveal`;
 }
 
-// ask engine
-function getPromptText(){
-  const prompts = state.prompts;
-  if($('#randomPromptSwitch').classList.contains('on')) return rand(prompts);
-  const p = prompts[state.promptIndex % prompts.length];
-  state.promptIndex++;
-  return p;
-}
-function chooseAskPair(){
-  const n = state.n;
-  // choose asker by minimal asked count
-  let minAsked = Math.min(...state.askedCounts);
-  let candidates = [];
-  for(let i=0;i<n;i++) if(state.askedCounts[i] === minAsked) candidates.push(i);
-  let asker = candidates[Math.floor(Math.random()*candidates.length)];
-  // super asker bias
-  if(state.superAskerIndex >= 0){
-    const needed = Math.max(0,3 - state.askedCounts[state.superAskerIndex]);
-    if(needed > 0 && Math.random() < 0.4) asker = state.superAskerIndex;
-  }
-  // target weighted towards bluffer
-  let target = weightedIndex(n, state.oddIndex);
-  if(target === asker){
-    const others = Array.from({length:n}, (_,i)=>i).filter(i=>i!==asker);
-    target = others[Math.floor(Math.random()*others.length)];
-  }
-  return {asker, target};
-}
+tapRevealBtn.onclick = ()=>{
+  tapRevealBtn.textContent = state.assignments[state.revealIndex];
+};
 
-// ---------------------------
-// REPLACED: Safe nextAskBtn handler
-// ---------------------------
-nextAskBtn.addEventListener('click', ()=>{
-  // Prevent asking before Ask Phase actually started
-  if(askArea.classList.contains('hidden')){
-    alert('Start the Ask Phase first — press "Start Ask Phase" or use the Start Ask button in the sticky bar.');
+nextRevealBtn.onclick = ()=>{
+  state.revealIndex++;
+  if(state.revealIndex >= state.n){
+    reveal.classList.add('hidden');
+    startAskPhase();
     return;
   }
+  updateRevealUI();
+};
 
-  // Defensive: ensure totalTurns is valid
-  if(!state.totalTurns || state.totalTurns <= 0){
-    // fallback: compute from min per player if present
-    const minPer = Math.max(1, parseInt($('#minPerPlayer').value,10) || 1);
-    state.totalTurns = minPer * state.n;
-    $('#askTotal').textContent = state.totalTurns;
+/* ============================================================
+   ASK PHASE
+============================================================ */
+function startAskPhase(){
+  ask.classList.remove('hidden');
+  buildAvatars();
+  stickyAction.textContent = "Next Ask";
+}
+
+function buildAvatars(){
+  avatarRow.innerHTML='';
+  for(let i=0;i<state.n;i++){
+    const a = document.createElement('div');
+    a.className='avatar';
+    a.textContent = i+1;
+    avatarRow.appendChild(a);
   }
+}
+
+function choosePair(){
+  let a = Math.floor(Math.random()*state.n);
+  let t = Math.floor(Math.random()*state.n);
+  while(t===a) t = Math.floor(Math.random()*state.n);
+  return {asker:a, target:t};
+}
+
+stickyAction.onclick = ()=>{
+  if(ask.classList.contains('hidden')) return;
 
   if(state.askTurns >= state.totalTurns){
-    // already complete — show summary only if at least one ask happened
-    if(state.askTurns > 0) showAskComplete();
+    if(state.askTurns>0) endAskPhase();
     return;
   }
 
-  const pair = chooseAskPair();
-  state.askedCounts[pair.asker] += 1;
-  state.askTurns += 1;
-  $('#askTurns').textContent = state.askTurns;
-  $('#askTotal').textContent = state.totalTurns;
-  const prompt = getPromptText();
-  askPrompt.textContent = `Player ${pair.asker+1} → Player ${pair.target+1}  — Q: ${prompt}`;
-  // visual indicators
-  Array.from(avatarsLine.children).forEach((el, idx)=>{
-    el.classList.remove('pulse','bounce');
-    if(idx === pair.asker) el.classList.add('bounce');
-    if(idx === pair.target) el.classList.add('pulse');
+  const p = choosePair();
+  state.askedCounts[p.asker]++;
+  state.askTurns++;
+
+  const prompt = state.prompts[Math.floor(Math.random()*state.prompts.length)];
+  askPrompt.textContent = `Player ${p.asker+1} → Player ${p.target+1}: ${prompt}`;
+
+  highlightAvatars(p.asker,p.target);
+
+  if(state.askTurns >= state.totalTurns){
+    setTimeout(endAskPhase,200);
+  }
+};
+
+function highlightAvatars(a,t){
+  [...avatarRow.children].forEach((el,i)=>{
+    el.classList.remove('bounce','pulse');
+    if(i===a) el.classList.add('bounce');
+    if(i===t) el.classList.add('pulse');
   });
-  renderAskSummary();
-  // sound: ping when bluffer targeted
-  if(pair.target === state.oddIndex) playPing(); else playPop();
-  // if last turn, show summary (only if asks actually happened)
-  if(state.askTurns >= state.totalTurns) setTimeout(()=> showAskComplete(), 200);
-});
-// ---------------------------
-// End replaced handler
-// ---------------------------
-
-function renderAskSummary(){
-  let lines = [];
-  for(let i=0;i<state.n;i++){
-    lines.push(`Player ${i+1}: asked ${state.askedCounts[i] || 0} times`);
-  }
-  lines.push('');
-  lines.push(`Turns: ${state.askTurns} / ${state.totalTurns}`);
-  askSummary.textContent = lines.join('\n');
 }
 
-// ---------------------------
-// REPLACED: Guarded showAskComplete function
-// ---------------------------
-function showAskComplete(){
-  // Guard: only show completion if Ask Phase was running and at least one ask was made
-  if(askArea.classList.contains('hidden')){
-    // Ask phase not visible — nothing to do
-    console.warn('Attempted to show Ask Complete while Ask Phase not active.');
-    return;
-  }
-  if(state.askTurns <= 0){
-    // No asks have occurred — don't show modal
-    alert('No asks have been made yet. Press Next Ask to begin.');
-    return;
-  }
-
-  // build modal summary and move to vote
-  let html = `<div style="font-weight:800;margin-bottom:8px">Ask phase complete</div><div class="small muted">Ask counts:</div><ul style="padding-left:16px;margin:8px 0">`;
-  for(let i=0;i<state.n;i++){ html += `<li>Player ${i+1}: ${state.askedCounts[i] || 0} asks</li>`; }
-  html += `</ul><div class="small muted">Proceed to voting.</div>`;
-  modalContent.innerHTML = html;
-  modal.classList.remove('hidden');
-  modal.setAttribute('aria-hidden','false');
-
-  // prepare vote UI
-  askArea.classList.add('hidden');
-  voteCard.classList.remove('hidden');
-  // build voteGrid
-  voteGrid.innerHTML = '';
-  for(let i=0;i<state.n;i++){
-    const b = document.createElement('button'); b.className='avatar num'; b.textContent = i+1;
-    b.style.cursor='pointer';
-    b.addEventListener('click', ()=> {
-      // mark selection visually
-      Array.from(voteGrid.children).forEach(c=>c.style.outline='none');
-      b.style.outline='3px solid rgba(255,217,61,0.25)';
-      b.dataset.selected='true';
-    });
-    voteGrid.appendChild(b);
-  }
-  // set stickyPrimary to reveal
-  stickyPrimary.textContent = 'Reveal Odd One';
-  stickyPrimary.onclick = ()=> revealResultBtn.click();
-  stickyLabel.textContent = 'Voting';
-  playPop();
-  // show ask summary too
-  renderAskSummary();
+/* ============================================================
+   END ASK PHASE → VOTE
+============================================================ */
+function endAskPhase(){
+  ask.classList.add('hidden');
+  showModal("Ask phase completed! Vote who you think is the odd one.");
+  buildVote();
 }
-// ---------------------------
-// End replaced function
-// ---------------------------
 
-finishAskBtn.addEventListener('click', showAskComplete);
-modalOk.addEventListener('click', ()=>{
-  modal.classList.add('hidden');
-  modal.setAttribute('aria-hidden','true');
-});
-
-// reveal result
-revealResultBtn.addEventListener('click', ()=>{
-  const odd = state.oddIndex;
-  oddNumber.textContent = '#'+(odd+1);
-  const v = state.assignments[odd];
-  oddWord.textContent = (v==='?') ? 'They had no word (Bluffer)' : 'Word: ' + v;
-  oddWas.textContent = (v==='?') ? 'They were the bluffer!' : 'They had a different word!';
-  $('#resultPane').classList.remove('hidden');
-  // confetti + fanfare
-  playFanfare();
-  fireConfetti();
-  stickyPrimary.textContent = 'Play Again';
-  stickyPrimary.onclick = ()=> location.reload();
-});
-
-// restart
-restartBtn.addEventListener('click', ()=> location.reload());
-
-// stickyPrimary default behavior (reveal during reveal phase)
-stickyPrimary.addEventListener('click', ()=>{
-  if(playWrap.classList.contains('hidden')) return;
-  if(stickyPrimary.textContent === 'Reveal'){ $('#revealBtn').click(); return; }
-  if(stickyPrimary.textContent === 'Reveal' || stickyPrimary.textContent === 'Next') $('#revealBtn').click();
-});
-
-// small helper to show/hide openAskBtn
-$('#openAskBtn').addEventListener('click', ()=> startAskPhase());
-
-// -- confetti implementation (moderate complexity, canvas particle)
-const confetti = (function(){
-  const C = confettiCanvas;
-  let ctx = null, W=0,H=0, particles=[], raf=null;
-  function resize(){ W = C.width = innerWidth; H = C.height = innerHeight; ctx = C.getContext('2d'); }
-  function rand(min,max){ return Math.random()*(max-min)+min; }
-  function createParticle(x,y){
-    const colors = ['#FFD93D','#2DE2E6','#FF4D8C','#9EF01A','#7C3AED'];
-    return {
-      x:x||rand(0,W), y:y||rand(0,H/2),
-      vx:rand(-4,4), vy:rand(-6,2),
-      size:rand(6,12), wobble:rand(0,Math.PI*2), wobbleSpeed:rand(0.05,0.15),
-      color:colors[Math.floor(Math.random()*colors.length)],
-      life:rand(60,120)
-    };
+function buildVote(){
+  voteRow.innerHTML='';
+  for(let i=0;i<state.n;i++){
+    const v = document.createElement('div');
+    v.className='avatar';
+    v.textContent = i+1;
+    v.onclick = ()=> revealResult(i);
+    voteRow.appendChild(v);
   }
-  function step(){
-    ctx.clearRect(0,0,W,H);
-    for(let i=particles.length-1;i>=0;i--){
-      const p = particles[i];
-      p.wobble += p.wobbleSpeed;
-      p.x += p.vx + Math.sin(p.wobble)*0.8;
-      p.y += p.vy + Math.cos(p.wobble)*0.3;
-      p.vy += 0.12; // gravity
-      p.life--;
-      ctx.save();
-      ctx.fillStyle = p.color;
-      ctx.translate(p.x,p.y);
-      ctx.rotate(p.wobble);
-      ctx.fillRect(-p.size/2,-p.size/2,p.size,p.size*0.6);
-      ctx.restore();
-      if(p.life <= 0 || p.y > H+50){ particles.splice(i,1); }
-    }
-    if(particles.length>0) raf = requestAnimationFrame(step); else { cancelAnimationFrame(raf); raf=null; ctx.clearRect(0,0,W,H); }
-  }
-  window.addEventListener('resize', resize);
-  function fire(count=50, x=null,y=null){
-    if(!ctx) resize();
-    for(let i=0;i<count;i++) particles.push(createParticle(x,y));
-    if(!raf) raf = requestAnimationFrame(step);
-  }
-  return {fire,resize};
-})();
-function fireConfetti(){ confetti.fire(60); }
+  vote.classList.remove('hidden');
+  stickyAction.textContent = "Waiting…";
+  stickyAction.disabled = true;
+}
 
-// init confetti canvas
-confetti.resize();
+/* ============================================================
+   REVEAL RESULT
+============================================================ */
+function revealResult(voteIndex){
+  let msg = (voteIndex === state.oddIndex)
+    ? `Correct! Player ${voteIndex+1} was the LIAR! 🎉`
+    : `Wrong! The liar was Player ${state.oddIndex+1}.`;
 
-// quick init
-(function init(){
-  state.avatarStyle = 'number';
-  renderAvatarPreview();
-  state.soundOn = soundSwitch.classList.contains('on');
-  stickyPrimary.textContent = 'Next';
-  stickyLabel.textContent = 'Ready';
-  stickyPrimary.onclick = ()=> { /* noop until game starts */ };
-})();
+  showModal(msg);
+}
 
-// small accessibility: keyboard reveal (space)
-document.addEventListener('keydown', (e)=>{
-  if(e.key === ' '){
-    if(!playWrap.classList.contains('hidden')){ $('#revealBtn').click(); }
-  }
-});
+/* ============================================================
+   MODAL HANDLING (FIXED)
+============================================================ */
+function showModal(msg){
+  modalContent.innerHTML = msg;
+  modal.classList.add('active');
+}
+modalOk.onclick = ()=> modal.classList.remove('active');
+modal.onclick = (e)=>{ if(e.target===modal) modal.classList.remove('active'); };
 
+/* ============================================================
+   RANDOM WORD BUTTON
+============================================================ */
+$('#randomizeWords').onclick = ()=>{
+  const sample = ["Phone","Bottle","Shoes","Keys","Pillow","Mirror","Ring","Earbuds","TV","Pen"];
+  let w1 = sample[Math.floor(Math.random()*sample.length)];
+  let w2 = sample[Math.floor(Math.random()*sample.length)];
+  while(w2===w1) w2 = sample[Math.floor(Math.random()*sample.length)];
+  wordListEl.value = `${w1},${w2}`;
+};
 </script>
 </body>
 </html>
