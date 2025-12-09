@@ -522,7 +522,6 @@ function renderAvatarPreview(){
   }
 }
 function smallFaceSVG(i){
-  // small simple emoji-ish svg
   const colors = ['#FFD93D','#2DE2E6','#FFB86B','#FF4D8C','#9EF01A','#7C3AED'];
   const bg = colors[i % colors.length];
   return `<div style="width:36px;height:36px;border-radius:999px;display:flex;align-items:center;justify-content:center;background:${bg};font-weight:800;color:#051">${i}</div>`;
@@ -614,8 +613,6 @@ $('#revealBtn').addEventListener('click', ()=>{
   flipCard(true);
   playFlip();
   $('#revealBtn').classList.add('hidden');
-  $('#revealed')?.classList?.remove ? null : null;
-  // show the back message and show OpenAsk button when done
 });
 $('#nextPlayerBtn').addEventListener('click', ()=>{
   // close flip
@@ -639,12 +636,17 @@ $('#nextPlayerBtn').addEventListener('click', ()=>{
 // show back when flipping completes
 cardInner.addEventListener('transitionend', (e)=> {
   if(flipped){
-    // when flipped to back, we want to show backWord clearly (already set)
+    // nothing extra required here
   }
 });
 
 // start ask phase
 function startAskPhase(){
+  // ensure ask area only opens after all reveals are done
+  if(state.currentReveal < state.n){
+    alert('Finish all reveals first.');
+    return;
+  }
   stickyLabel.textContent = 'Ask Phase';
   stickyPrimary.textContent = 'Next Ask';
   stickyPrimary.onclick = ()=> nextAskBtn.click();
@@ -699,8 +701,31 @@ function chooseAskPair(){
   }
   return {asker, target};
 }
+
+// ---------------------------
+// REPLACED: Safe nextAskBtn handler
+// ---------------------------
 nextAskBtn.addEventListener('click', ()=>{
-  if(state.askTurns >= state.totalTurns){ showAskComplete(); return; }
+  // Prevent asking before Ask Phase actually started
+  if(askArea.classList.contains('hidden')){
+    alert('Start the Ask Phase first — press "Start Ask Phase" or use the Start Ask button in the sticky bar.');
+    return;
+  }
+
+  // Defensive: ensure totalTurns is valid
+  if(!state.totalTurns || state.totalTurns <= 0){
+    // fallback: compute from min per player if present
+    const minPer = Math.max(1, parseInt($('#minPerPlayer').value,10) || 1);
+    state.totalTurns = minPer * state.n;
+    $('#askTotal').textContent = state.totalTurns;
+  }
+
+  if(state.askTurns >= state.totalTurns){
+    // already complete — show summary only if at least one ask happened
+    if(state.askTurns > 0) showAskComplete();
+    return;
+  }
+
   const pair = chooseAskPair();
   state.askedCounts[pair.asker] += 1;
   state.askTurns += 1;
@@ -717,9 +742,12 @@ nextAskBtn.addEventListener('click', ()=>{
   renderAskSummary();
   // sound: ping when bluffer targeted
   if(pair.target === state.oddIndex) playPing(); else playPop();
-  // if last turn, plan to show summary soon
+  // if last turn, show summary (only if asks actually happened)
   if(state.askTurns >= state.totalTurns) setTimeout(()=> showAskComplete(), 200);
 });
+// ---------------------------
+// End replaced handler
+// ---------------------------
 
 function renderAskSummary(){
   let lines = [];
@@ -731,9 +759,22 @@ function renderAskSummary(){
   askSummary.textContent = lines.join('\n');
 }
 
-// finish ask
-finishAskBtn.addEventListener('click', showAskComplete);
+// ---------------------------
+// REPLACED: Guarded showAskComplete function
+// ---------------------------
 function showAskComplete(){
+  // Guard: only show completion if Ask Phase was running and at least one ask was made
+  if(askArea.classList.contains('hidden')){
+    // Ask phase not visible — nothing to do
+    console.warn('Attempted to show Ask Complete while Ask Phase not active.');
+    return;
+  }
+  if(state.askTurns <= 0){
+    // No asks have occurred — don't show modal
+    alert('No asks have been made yet. Press Next Ask to begin.');
+    return;
+  }
+
   // build modal summary and move to vote
   let html = `<div style="font-weight:800;margin-bottom:8px">Ask phase complete</div><div class="small muted">Ask counts:</div><ul style="padding-left:16px;margin:8px 0">`;
   for(let i=0;i<state.n;i++){ html += `<li>Player ${i+1}: ${state.askedCounts[i] || 0} asks</li>`; }
@@ -741,6 +782,7 @@ function showAskComplete(){
   modalContent.innerHTML = html;
   modal.classList.remove('hidden');
   modal.setAttribute('aria-hidden','false');
+
   // prepare vote UI
   askArea.classList.add('hidden');
   voteCard.classList.remove('hidden');
@@ -748,7 +790,8 @@ function showAskComplete(){
   voteGrid.innerHTML = '';
   for(let i=0;i<state.n;i++){
     const b = document.createElement('button'); b.className='avatar num'; b.textContent = i+1;
-    b.style.cursor='pointer'; b.addEventListener('click', ()=> {
+    b.style.cursor='pointer';
+    b.addEventListener('click', ()=> {
       // mark selection visually
       Array.from(voteGrid.children).forEach(c=>c.style.outline='none');
       b.style.outline='3px solid rgba(255,217,61,0.25)';
@@ -764,6 +807,11 @@ function showAskComplete(){
   // show ask summary too
   renderAskSummary();
 }
+// ---------------------------
+// End replaced function
+// ---------------------------
+
+finishAskBtn.addEventListener('click', showAskComplete);
 modalOk.addEventListener('click', ()=>{
   modal.classList.add('hidden');
   modal.setAttribute('aria-hidden','true');
@@ -847,12 +895,9 @@ confetti.resize();
 
 // quick init
 (function init(){
-  // set initial avatar style
   state.avatarStyle = 'number';
   renderAvatarPreview();
-  // sound switch state
   state.soundOn = soundSwitch.classList.contains('on');
-  // sticky primary default (non-game)
   stickyPrimary.textContent = 'Next';
   stickyLabel.textContent = 'Ready';
   stickyPrimary.onclick = ()=> { /* noop until game starts */ };
